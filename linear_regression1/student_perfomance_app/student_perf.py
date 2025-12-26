@@ -4,10 +4,18 @@ import numpy as np
 import pickle
 from sklearn.preprocessing import StandardScaler,LabelEncoder
 
+import os
+import pickle
+
 def load_model():
-    with open("linear_regression_model.pkl", 'rb') as file:
-        model,scaler,le = pickle.load(file)
+    base_dir = os.path.dirname(__file__)  # directory of student_perf.py
+    model_path = os.path.join(base_dir, "linear_regression_model.pkl")
+
+    with open(model_path, "rb") as file:
+        model, scaler, le = pickle.load(file)
+
     return model, scaler, le
+
 
 def preprocessing_input_data(data,scaler,le):
     data['Extracurricular Activities'] = le.transform([data['Extracurricular Activities']])
